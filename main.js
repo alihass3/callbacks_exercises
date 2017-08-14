@@ -126,6 +126,7 @@ console.log( 'The total number of transactions is:', totalTransactions );
 /*
   Calculate the total number of 'sales'.
 
+
   HINT(S):
   - Not all transactions are 'sales'.
 */
@@ -149,6 +150,18 @@ var numSales;
   P.S.
   The breakdown above takes up a lot of space, feel free to move it to the top or bottom of the file!
 */
+//transactions.forEach( function( transaction ) {
+    //console.log( 'The current number is', number );
+  //  transaction[:type]
+//} );
+
+var Sales = transactions.filter(function(transaction){
+  //return word.length > 6;
+  //have an array that stores the updated
+  return transaction['type']==='sale';
+  });
+
+numSales= Sales.length;
 
 console.log( 'The total number of sales is:', numSales );
 
@@ -159,7 +172,24 @@ console.log( 'The total number of sales is:', numSales );
 /*
   Calculate the total number of 'purchases'.
 */
+
 var numPurchases;
+//need all the transactions items.
+//will use for each here as it makes sense.
+//var sum=0;
+var Purchases = transactions.map( function( transaction ) {
+
+    return transaction['items'].length;
+
+} );
+purchases_number_array=Purchases;
+
+console.log(Purchases);
+
+var numPurchases = purchases_number_array.reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
 
 console.log( 'The total number of purchases is:', numPurchases );
 
@@ -170,10 +200,28 @@ console.log( 'The total number of purchases is:', numPurchases );
 /*
   Calculate the total number of 'cash' 'sales'.
 
+
   HINT(S):
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
 var numCashSales;
+
+var CashSales = transactions.filter( function( transaction ) {
+    return transaction['paymentMethod']==='cash';
+    //return transaction['items'].length;
+
+} );
+
+var CashSale = CashSales.map( function( transaction ) {
+
+    return transaction['items'].length;
+
+} );
+
+var numCashSales = CashSale.reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
 
 console.log( 'The total number of cash sales is:', numCashSales );
 
@@ -188,6 +236,22 @@ console.log( 'The total number of cash sales is:', numCashSales );
   - Make sure to exclude any 'sales' made by 'credit'!
 */
 var numCreditPurchases;
+
+var CreditSales = transactions.filter( function( transaction ) {
+    return transaction['paymentMethod']==='credit';
+    //return transaction['items'].length;
+
+} );
+
+var CreditSale = CreditSales.map( function( transaction ) {
+
+    return transaction['items'].length;
+
+} );
+
+var numCreditPurchases = CreditSale.reduce(function(sum, value) {
+  return sum + value;
+}, 0);
 
 console.log( 'The total number of credit purchases is:', numCreditPurchases );
 
@@ -205,6 +269,12 @@ console.log( 'The total number of credit purchases is:', numCreditPurchases );
   - This array is allowed to contain duplicate values.
 */
 var uniqueVendors;
+
+var uniqueVendors = transactions.map( function( transaction ) {
+
+    return transaction['vendor'];
+
+} );
 
 console.log( 'The unique vendors are:', uniqueVendors );
 
